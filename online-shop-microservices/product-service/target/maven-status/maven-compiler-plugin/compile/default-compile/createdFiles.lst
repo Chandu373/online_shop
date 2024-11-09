@@ -1,0 +1,11 @@
+com\chandu\product_service\repository\ProductRepository.class
+com\chandu\product_service\service\ProductService.class
+com\chandu\product_service\dto\ProductRequest.class
+com\chandu\product_service\model\Product.class
+com\chandu\product_service\model\Product$ProductBuilder.class
+com\chandu\product_service\dto\ProductResponse$ProductResponseBuilder.class
+com\chandu\product_service\dto\ProductResponse.class
+com\chandu\product_service\controller\ProductController.class
+com\chandu\product_service\dto\ProductRequest$ProductRequestBuilder.class
+com\chandu\product_service\mapper\ProductMapper.class
+com\chandu\product_service\ProductServiceApplication.class
