@@ -10,12 +10,13 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long  id;
     private String orderNumber ;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<OrderLineItems> orderLineItems;
 }

@@ -1,6 +1,6 @@
-package com.chandu.order_service.model;
+package com.chandu.order_service.dto;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,16 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Table(name = "order_line_items")
-public class OrderLineItems {
+public class OrderLineItemsDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String skuCode;
     private BigDecimal price;

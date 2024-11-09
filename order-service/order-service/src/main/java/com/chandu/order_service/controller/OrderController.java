@@ -5,6 +5,7 @@ import com.chandu.order_service.dto.OrderRequest;
 import com.chandu.order_service.dto.OrderResponse;
 import com.chandu.order_service.model.Order;
 import com.chandu.order_service.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/order")
+@Slf4j
 public class OrderController {
 
     @Autowired
@@ -21,14 +23,15 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) {
-        OrderResponse orderResponse = orderService.create(orderRequest);
+    public ResponseEntity<OrderResponse> placeOrder(@RequestBody OrderRequest orderRequest) {
+        OrderResponse orderResponse = orderService.placeOrder(orderRequest);
+        log.info("placeOrder order placed successfully " + orderResponse.getOrderNumber());
         return ResponseEntity.ok(orderResponse);
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<OrderResponse>> getOrders(){
-        return ResponseEntity.ok(orderService.getAllOrders());
+        List<OrderResponse> orderResponseList = orderService.getAllOrders();
+        return ResponseEntity.ok(orderResponseList);
     }
 }
