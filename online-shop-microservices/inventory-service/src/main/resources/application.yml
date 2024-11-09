@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: Inventory-Service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/inventory-service
@@ -8,6 +10,11 @@ spring:
   jpa:
     hibernate:
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
 
 server:
-  port: 9094
+  port: 0 # used to run multiple instance for Inventory-service

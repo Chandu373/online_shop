@@ -24,9 +24,9 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
-    private WebClient webClient;
+    private WebClient.Builder webClientBuilder;
 
-    private static String INVENTORY_SERVICE_URL = "http://localhost:9094/api/inventory";
+    private static String INVENTORY_SERVICE_URL = "http://inventory-service/api/inventory";
 
 
     public OrderResponse placeOrder(OrderRequest orderRequest) {
@@ -45,7 +45,7 @@ public class OrderService {
 
         // call inventory service check is stock is available or not using webClient
 
-        InventoryResponse[] result = webClient.get()
+        InventoryResponse[] result = webClientBuilder.build().get()
                 .uri(INVENTORY_SERVICE_URL, uriBuilder -> uriBuilder.queryParam("skuCode", skuCodesList).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
