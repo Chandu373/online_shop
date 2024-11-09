@@ -33,6 +33,6 @@ public class ProductService {
     }
 
     public List<ProductResponse> getAllProducts() {
-          return  productRepository. findAll().stream().map(productMapper::productToProductResponse).toList();
+          return  productRepository.findAll().stream().map(productMapper::productToProductResponse).toList();
     }
 }
