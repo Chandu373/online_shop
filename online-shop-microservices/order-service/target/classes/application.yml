@@ -1,13 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/inventory-service
+    url: jdbc:mysql://127.0.0.1:3306/order-service
     username: root
     password: root
-    ddl-auto: create-drop
   jpa:
     hibernate:
+      ddl-auto: update
 
 
 server:
-  port: 9094
+  port: 9092

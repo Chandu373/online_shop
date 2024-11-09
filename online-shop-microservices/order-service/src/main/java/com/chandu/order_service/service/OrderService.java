@@ -1,5 +1,6 @@
 package com.chandu.order_service.service;
 
+import com.chandu.order_service.dto.InventoryResponse;
 import com.chandu.order_service.dto.OrderLineItemsDTO;
 import com.chandu.order_service.dto.OrderRequest;
 import com.chandu.order_service.dto.OrderResponse;
@@ -9,7 +10,9 @@ import com.chandu.order_service.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +22,11 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private WebClient webClient;
+
+    private static String INVENTORY_SERVICE_URL = "http://localhost:9094/api/inventory";
 
 
     public OrderResponse placeOrder(OrderRequest orderRequest) {
@@ -32,8 +40,24 @@ public class OrderService {
                 .toList();
 
         order.setOrderLineItems(orderLineItemsList);
+
+        List<String> skuCodesList = order.getOrderLineItems().stream().map(OrderLineItems::getSkuCode).toList();
+
+        // call inventory service check is stock is available or not using webClient
+
+        InventoryResponse[] result = webClient.get()
+                .uri(INVENTORY_SERVICE_URL, uriBuilder -> uriBuilder.queryParam("skuCode", skuCodesList).build())
+                .retrieve()
+                .bodyToMono(InventoryResponse[].class)
+                .block();
+
+        boolean isStockAvailable = Arrays.stream(result).allMatch(inventoryResponse -> inventoryResponse.isInStock());
+        if (!isStockAvailable) {
+            throw new RuntimeException("Stock not available for selected products");
+        }
         orderRepository.save(order);
         return orderToOrderResponse(order);
+
     }
 
     public OrderResponse orderToOrderResponse(Order order) {
