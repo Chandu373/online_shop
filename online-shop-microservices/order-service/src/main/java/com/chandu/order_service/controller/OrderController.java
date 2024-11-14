@@ -30,8 +30,12 @@ public class OrderController {
     @CircuitBreaker(name = INVENTORY_SERVICE, fallbackMethod = "fallBackMethod")
     @TimeLimiter(name = INVENTORY_SERVICE)
     public String placeOrder(@RequestBody OrderRequest orderRequest) {
-        OrderResponse orderResponse = orderService.placeOrder(orderRequest);
-        log.info("placeOrder order placed successfully " + orderResponse.getOrderNumber());
+        try{
+            OrderResponse orderResponse = orderService.placeOrder(orderRequest);
+            log.info("placeOrder order placed successfully " + orderResponse.getOrderNumber());
+        }catch (Exception errMsg){
+            log.info("placeOrder Exception occurred while placing order "+errMsg.getMessage());
+        }
         return "order placed successfully";
     }
 
