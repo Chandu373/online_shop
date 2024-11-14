@@ -21,6 +21,7 @@
         <module>inventory-service</module>
         <module>discovery-server</module>
         <module>api-gateway</module>
+        <module>commenUtils</module>
     </modules>
 
     <properties>
@@ -44,6 +45,10 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.chandu</groupId>
+                <artifactId>commenUtils</artifactId>
             </dependency>
         </dependencies>
     </dependencyManagement>
