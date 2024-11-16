@@ -15,6 +15,10 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-
 server:
-  port: 0 # used to run multiple instance for Inventory-service
+  port: 0  # Used to run multiple instances of Inventory-Service
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

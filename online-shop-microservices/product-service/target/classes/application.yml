@@ -14,3 +14,7 @@ eureka:
 server:
   port: 9091
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0

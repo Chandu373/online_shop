@@ -34,10 +34,15 @@ spring:
         jwt:
           issuer-uri: http://localhost:8080/realms/spring-boot-micorservices-realm
 
-server:
-  port: 9096
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 9096
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

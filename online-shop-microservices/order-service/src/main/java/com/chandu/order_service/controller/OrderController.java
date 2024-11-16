@@ -28,7 +28,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     @CircuitBreaker(name = INVENTORY_SERVICE, fallbackMethod = "fallBackMethod")
-    @TimeLimiter(name = INVENTORY_SERVICE)
+//    @TimeLimiter(name = INVENTORY_SERVICE)
     public String placeOrder(@RequestBody OrderRequest orderRequest) {
         try{
             OrderResponse orderResponse = orderService.placeOrder(orderRequest);

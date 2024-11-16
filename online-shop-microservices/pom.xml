@@ -50,6 +50,11 @@
                 <groupId>com.chandu</groupId>
                 <artifactId>commenUtils</artifactId>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>3.0.0</version> <!-- You can use the latest version -->
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
