@@ -1,11 +1,9 @@
-/*
 package com.chandu.order_service.config;
 
 import com.chandu.order_service.events.OrderEvent;
-import com.chandu.order_service.model.Order;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +14,7 @@ public class KafkaOrderProducer {
 
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
+    @Value("notificationTopic")
     private String topic;
 
     public KafkaOrderProducer(KafkaTemplate<String, OrderEvent> kafkaTemplate) {
@@ -27,4 +26,3 @@ public class KafkaOrderProducer {
         log.info("Order event sent to kafka " + orderEvent);
     }
 }
-*/

@@ -1,5 +1,6 @@
 package com.chandu.order_service.service;
 
+import com.chandu.order_service.config.KafkaOrderProducer;
 import com.chandu.order_service.dto.InventoryResponse;
 import com.chandu.order_service.dto.OrderLineItemsDTO;
 import com.chandu.order_service.dto.OrderRequest;
@@ -23,8 +24,8 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
-//    @Autowired
-//    private KafkaOrderProducer kafkaOrderProducer;
+    @Autowired
+    private KafkaOrderProducer kafkaOrderProducer;
 
     @Autowired
     private WebClient.Builder webClientBuilder;
@@ -60,7 +61,7 @@ public class OrderService {
         }
         orderRepository.save(order);
         OrderEvent orderEvent = this.prepareOrderEvent(order,"Initiated");
-//        kafkaOrderProducer.sendOrderEvent(orderEvent);
+        kafkaOrderProducer.sendOrderEvent(orderEvent);
         return orderToOrderResponse(order);
 
     }

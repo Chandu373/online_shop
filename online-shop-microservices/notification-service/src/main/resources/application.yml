@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: notification-service
+  kafka:
+    bootstrap-servers:
+      - 9092
+    template:
+      default-topic: notificationTopic
+    consumer:
+      group-id: notificationId
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.type.mapping: event:com.chandu.order_service.events.OrderEvent
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 0  # Used to run multiple instances of notification-Service
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
